@@ -66,3 +66,15 @@ class AnnouncedWardResults(models.Model):
         return self.ward_name
 
 
+class LGA(models.Model):
+    uniqueid = models.AutoField(auto_created=True, primary_key=True)
+    lga_id = models.IntegerField()
+    lga_name = models.CharField(max_length=50)
+    state_id = models.IntegerField()
+    lga_description = models.TextField()
+    entered_by_user = models.CharField(max_length=50)
+    date_entered = models.DateTimeField(default=now)
+    user_ip_address = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.lga_name
