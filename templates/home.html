@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 
 {% block page_header %}
-    Home
+    2011 National Election
 {% endblock page_header %}
 
 {% block content %}
-    <p>hello world!</p>
+    <div>
+        <ul>
+            {% for unit in polling_units  %}
+                {% if unit.polling_unit_name|length %}
+                    <li>{{ unit.polling_unit_name }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock content %}
