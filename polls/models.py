@@ -21,4 +21,4 @@ class AnnouncedLgaResults(models.Model):
     party_score = models.IntegerField()
     entered_by_user = models.CharField(max_length=50)
     date_entered = models.DateTimeField(default=now)
-    user_ip_address = models.CharField(50)
+    user_ip_address = models.CharField(max_length=50)
