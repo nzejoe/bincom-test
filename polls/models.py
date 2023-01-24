@@ -14,7 +14,7 @@ class LGA(models.Model):
     uniqueid = models.AutoField(auto_created=True, primary_key=True)
     lga_id = models.IntegerField()
     lga_name = models.CharField(max_length=50)
-    state_id = models.ForeignKey(State, on_delete=models.CASCADE)
+    state = models.ForeignKey(State, on_delete=models.CASCADE)
     lga_description = models.TextField()
     entered_by_user = models.CharField(max_length=50)
     date_entered = models.DateTimeField(default=now)
@@ -28,7 +28,7 @@ class Ward(models.Model):
     uniqueid = models.AutoField(auto_created=True, primary_key=True)
     ward_id = models.IntegerField()
     ward_name = models.CharField(max_length=50)
-    lga_id = models.ForeignKey(LGA, on_delete=models.CASCADE)
+    lga_id = models.IntegerField()
     ward_description = models.TextField()
     entered_by_user = models.CharField(max_length=50)
     date_entered = models.DateTimeField(default=now)
@@ -41,17 +41,17 @@ class Ward(models.Model):
 class PollingUnit(models.Model):
     uniqueid = models.AutoField(auto_created=True, primary_key=True)
     polling_unit_id = models.IntegerField()
-    ward_id = models.ForeignKey(Ward, on_delete=models.CASCADE)
-    lga_id = models.ForeignKey(LGA, on_delete=models.CASCADE)
+    ward_id = models.IntegerField()
+    lga_id = models.IntegerField()
     uniquewardid = models.IntegerField()
     polling_unit_number = models.CharField(max_length=50)
     polling_unit_name = models.CharField(max_length=50)
-    polling_unit_description = models.TextField()
+    polling_unit_description = models.TextField(null=True, blank=True)
     lat = models.CharField(max_length=255)
     long = models.CharField(max_length=255)
-    entered_by_user = models.CharField(max_length=50)
-    date_entered = models.DateTimeField(default=now)
-    user_ip_address = models.CharField(max_length=50)
+    entered_by_user = models.CharField(max_length=50, null=True, blank=True)
+    date_entered = models.DateTimeField(default=now, null=True, blank=True)
+    user_ip_address = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return self.polling_unit_name
@@ -63,7 +63,7 @@ class AgentName(models.Model):
     lastname = models.CharField(max_length=255)
     email = models.EmailField(null=True, blank=True)
     phone = models.CharField(max_length=13)
-    pollingunit_uniqueid = models.ForeignKey(PollingUnit, on_delete=models.CASCADE)
+    pollingunit_uniqueid = models.IntegerField()
 
     def __str__(self):
         return f"{self.firstname} {self.lastname}"
