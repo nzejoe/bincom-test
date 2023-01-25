@@ -2,7 +2,11 @@
 
 
 {% block page_header %}
-    <p>Total results by LGA</p>
+    {% if not lga %}
+        <p>Total collate results</p>
+    {% else %}
+        <p>Total results by {{ lga }} LGA</p>
+    {% endif %}
 {% endblock page_header %}
 
 
@@ -12,9 +16,9 @@
         <form action="{% url "polls:lga_results" %}" method="GET">
             <select name="lga" id="">
                 <option value="all">All</option>
-                <option value="3">Ukwauni</option>
-                <option value="10">Ugheli</option>
-                <option value="5">Eti-Osa</option>
+                {% for lga in lga_list %}
+                    <option value="{{ lga.pk }}">{{ lga }}</option>
+                {% endfor %}
             </select>
             <button type="submit">Filter</button>
         </form>
@@ -31,7 +35,7 @@
                 </tr>
             {% empty %}
             <tr>
-                <td colspan="2">No result collate for this LGA yet.</td>
+                <td colspan="2">No result collate for {{ lga }} LGA yet.</td>
             </tr>
             {% endfor %}
         </tbody>
