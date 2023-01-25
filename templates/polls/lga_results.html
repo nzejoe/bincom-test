@@ -8,6 +8,16 @@
 
 {% block content %}
     <div>
+        <p>Filter by LGA</p>
+        <form action="{% url "polls:lga_results" %}" method="GET">
+            <select name="lga" id="">
+                <option value="all">All</option>
+                <option value="3">Ukwauni</option>
+                <option value="10">Ugheli</option>
+                <option value="5">Eti-Osa</option>
+            </select>
+            <button type="submit">Filter</button>
+        </form>
         <table>
         <thead>
             <th>Party Name</th>

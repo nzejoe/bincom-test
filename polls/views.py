@@ -29,6 +29,11 @@ def unit_results(request, unit_id):
 
 
 def lga_results(request):
+
+    if request.method == "GET":
+        lga = request.GET.get("lga")
+        print(lga)
+
     lga_results = (
         AnnouncedPuResults.objects.values("party_abbreviation")
         .annotate(total_results=Sum("party_score"))
