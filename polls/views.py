@@ -74,8 +74,6 @@ def lga_results(request):
             .annotate(total_results=Sum("party_score"))
             .order_by("-total_results")
         )
-        
-        
 
     context = {
         "lga": lga,
@@ -84,3 +82,7 @@ def lga_results(request):
     }
 
     return render(request, "polls/lga_results.html", context)
+
+
+def add_results(request):
+    return render(request, "polls/add_results.html")

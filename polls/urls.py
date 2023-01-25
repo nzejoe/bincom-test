@@ -9,4 +9,5 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("polling_unit_results/<int:unit_id>/", views.unit_results, name="unit_results"),
     path("lga_results/", views.lga_results, name="lga_results"),
+    path("add_results/", views.add_results, name="add_results"),
 ]

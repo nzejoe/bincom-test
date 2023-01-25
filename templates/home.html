@@ -6,7 +6,9 @@
 
 {% block content %}
     <div>
-        <p><a href="{% url "polls:lga_results" %}">View total results by LGA </a></p>
+        <p><a href="{% url "polls:lga_results" %}">View total results by LGA </a> - 
+            <a href="{% url "polls:add_results" %}">Add results</a>
+        </p>
         <ul>
             {% for unit in polling_units  %}
                 {% if unit.polling_unit_name|length %}
