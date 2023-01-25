@@ -7,5 +7,24 @@
 
 
 {% block content %}
-    
+    <div>
+        <table>
+        <thead>
+            <th>Party Name</th>
+            <th>Total votes</th>
+        </thead>
+        <tbody>
+            {% for result in lga_results %}
+                <tr>
+                    <td>{{ result.party_abbreviation }}</td>
+                    <td>{{ result.total_results }}</td>
+                </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2">No result collate for this LGA yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
 {% endblock content %}
