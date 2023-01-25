@@ -1,9 +1,7 @@
-from functools import reduce
-
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Sum, Q
 
-from .models import PollingUnit, AnnouncedPuResults, LGA
+from .models import PollingUnit, AnnouncedPuResults, LGA, Party
 
 
 def home(request):
@@ -44,10 +42,7 @@ def lga_results(request):
     ):
         lga_id = request.GET.get("lga")
         lga = LGA.objects.get(pk=lga_id)
-        # print()
-        # print(lga, lga_id)
-        # print()
-        # get the IDs of each polling unit
+
         polling_units = PollingUnit.objects.filter(lga_id=lga_id).values_list(
             "pk", flat=True
         )
@@ -85,4 +80,41 @@ def lga_results(request):
 
 
 def add_results(request):
-    return render(request, "polls/add_results.html")
+    polling_units = PollingUnit.objects.all()
+    parties = Party.objects.all()
+
+    # user location
+    ip_address = request.META["REMOTE_ADDR"]
+
+    if request.method == "POST":
+        polling_unit = request.POST.get("polling_unit")
+        agent_name = request.POST.get("agent_name")
+
+        # get all parties result
+        party_results = {
+            "PDP": request.POST.get("PDP"),
+            "DPP": request.POST.get("DPP"),
+            "ACN": request.POST.get("ACN"),
+            "PPA": request.POST.get("PPA"),
+            "CDC": request.POST.get("CDC"),
+            "JP": request.POST.get("JP"),
+            "ANPP": request.POST.get("ANPP"),
+            "LABOUR": request.POST.get("LABOUR"),
+            "CPP": request.POST.get("CPP"),
+        }
+
+        for party, score in party_results.items():
+            result = AnnouncedPuResults()
+            result.polling_unit_uniqueid = polling_unit
+            result.party_abbreviation = party
+            result.party_score = score
+            result.entered_by_user = agent_name
+            result.user_ip_address = ip_address
+            result.save()
+        return redirect("polls:unit_results", unit_id=polling_unit)
+
+    # print()
+    # print(result)
+    # print()
+    context = {"polling_units": polling_units, "parties": parties}
+    return render(request, "polls/add_results.html", context)

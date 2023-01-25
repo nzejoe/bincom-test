@@ -85,7 +85,7 @@ class AnnouncedLgaResults(models.Model):
 class AnnouncedPuResults(models.Model):
     result_id = models.AutoField(auto_created=True, primary_key=True)
     polling_unit_uniqueid = models.CharField(max_length=50)
-    party_abbreviation = models.CharField(max_length=4)
+    party_abbreviation = models.CharField(max_length=10)
     party_score = models.IntegerField()
     entered_by_user = models.CharField(max_length=50)
     date_entered = models.DateTimeField(default=now)
@@ -98,7 +98,7 @@ class AnnouncedPuResults(models.Model):
 class AnnouncedStateResults(models.Model):
     result_id = models.AutoField(auto_created=True, primary_key=True)
     state_name = models.CharField(max_length=50)
-    party_abbreviation = models.CharField(max_length=4)
+    party_abbreviation = models.CharField(max_length=10)
     party_score = models.IntegerField()
     entered_by_user = models.CharField(max_length=50)
     date_entered = models.DateTimeField(default=now)

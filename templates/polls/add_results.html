@@ -7,6 +7,34 @@
 
 {% block content %}
     <div>
-        
+        <form action="{% url "polls:add_results" %}" method="POST">
+            {% csrf_token %}
+            <fieldset>
+                <legend>Parties</legend>
+                {% for party in parties %}
+                    <div>
+                        <label for="{{ party.partyid }}">{{ party.partyname }}</label>
+                        <input type="number" name="{{ party.partyid }}" value="" required>
+                    </div>
+
+                {% endfor %}
+            </fieldset>
+            <fieldset>
+                <legend>Other informations</legend>
+                <div>
+                    <label for="">Polling unit</label>
+                    <select name="polling_unit" id="" required>
+                        {% for pu in polling_units %}
+                            <option value="{{ pu.pk }}">{{ pu }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="">Agent Name</label>
+                    <input type="text" required name="agent_name">
+                </div>
+            </fieldset>
+            <button type="submit">Save results</button>
+        </form>
     </div>
 {% endblock content %}
