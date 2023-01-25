@@ -7,8 +7,9 @@
     <title>Bincom Test</title>
 </head>
 <body>
-    <header>{% block page_header %}Welcome{% endblock page_header %}</header>
+    <header><a href="{% url "polls:home" %}">Home</a></header>
     <main>
+        <header>{% block page_header %}Welcome{% endblock page_header %}</header>
         {% block content %}{% endblock content %}
     </main>
 </body>

@@ -23,3 +23,7 @@ def unit_results(request, unit_id):
         "unit_results": unit_results,
     }
     return render(request, "polls/unit_results.html", context)
+
+
+def lga_results(request):
+    return render(request, "polls/lga_results.html")
