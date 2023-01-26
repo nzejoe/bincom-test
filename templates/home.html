@@ -6,15 +6,11 @@
 
 {% block content %}
     <div>
-        <p><a href="{% url "polls:lga_results" %}">View total results by LGA </a> - 
+        <p>
+            <a href="{% url "polls:polling_units" %}">View total results by polling units </a> - 
+            <a href="{% url "polls:lga_results" %}">View total results by LGA </a> - 
             <a href="{% url "polls:add_results" %}">Add results</a>
         </p>
-        <ul>
-            {% for unit in polling_units  %}
-                {% if unit.polling_unit_name|length %}
-                    <li><a href="{% url "polls:unit_results" unit.pk %}">{{ unit.polling_unit_name }}</a></li>
-                {% endif %}
-            {% endfor %}
-        </ul>
+        
     </div>
 {% endblock content %}

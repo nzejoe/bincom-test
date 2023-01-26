@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block page_header %}
+
+{% endblock page_header %}
+
+
+{% block content %}
+    <ul>
+        {% for unit in polling_units  %}
+            {% if unit.polling_unit_name|length %}
+                <li><a href="{% url "polls:unit_results" unit.pk %}">{{ unit.polling_unit_name }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock content %}

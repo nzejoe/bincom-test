@@ -5,12 +5,17 @@ from .models import PollingUnit, AnnouncedPuResults, LGA, Party
 
 
 def home(request):
-    polling_units = PollingUnit.objects.all()
+
+    return render(request, "home.html")
+
+
+def polling_units(request):
+    polling_units = PollingUnit.objects.exclude(polling_unit_name__exact="")
 
     context = {
         "polling_units": polling_units,
     }
-    return render(request, "home.html", context)
+    return render(request, "polls/polling_units.html", context)
 
 
 def unit_results(request, unit_id):
@@ -43,6 +48,7 @@ def lga_results(request):
         lga_id = request.GET.get("lga")
         lga = LGA.objects.get(pk=lga_id)
 
+        # get all polling units IDs in the this lga
         polling_units = PollingUnit.objects.filter(lga_id=lga_id).values_list(
             "pk", flat=True
         )
@@ -80,7 +86,7 @@ def lga_results(request):
 
 
 def add_results(request):
-    polling_units = PollingUnit.objects.all()
+    polling_units = PollingUnit.objects.exclude(polling_unit_name__exact="")
     parties = Party.objects.all()
 
     # user location
@@ -111,10 +117,8 @@ def add_results(request):
             result.entered_by_user = agent_name
             result.user_ip_address = ip_address
             result.save()
+        # redirect to polling uint results page
         return redirect("polls:unit_results", unit_id=polling_unit)
 
-    # print()
-    # print(result)
-    # print()
     context = {"polling_units": polling_units, "parties": parties}
     return render(request, "polls/add_results.html", context)
