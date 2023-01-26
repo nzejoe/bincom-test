@@ -20,7 +20,7 @@ decorator==5.1.1
 dicttoxml==1.7.16
 dill==0.3.6
 dj-database-url==1.2.0
-Django==4.1.5
+Django==3.2.16
 django-bootstrap-v5==1.0.11
 docutils==0.19
 environ==1.0
