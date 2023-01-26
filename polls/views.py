@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.db.models import Sum, Q
+from django.db.models import Sum
+from django.contrib import messages
 
 from .models import PollingUnit, AnnouncedPuResults, LGA, Party
 
@@ -123,6 +124,7 @@ def add_results(request):
             result.entered_by_user = agent_name
             result.user_ip_address = ip_address
             result.save()
+        messages.success(request, "Thank you! Information was saved successfully.")
         # redirect to polling uint results page
         return redirect("polls:unit_results", unit_id=polling_unit)
 
