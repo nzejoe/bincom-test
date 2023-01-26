@@ -1,40 +1,42 @@
 {% extends 'base.html' %}
+{% load bootstrap5 %}
 
 
 {% block page_header %}
-    <p>Add new poll results</p>
+    <h3 class="display-5">Add new poll results</h3>
 {% endblock page_header %}
 
 {% block content %}
     <div>
         <form action="{% url "polls:add_results" %}" method="POST">
             {% csrf_token %}
-            <fieldset>
+            <fieldset class="mb-3">
                 <legend>Parties</legend>
                 {% for party in parties %}
-                    <div>
-                        <label for="{{ party.partyid }}">{{ party.partyname }}</label>
-                        <input type="number" name="{{ party.partyid }}" value="" required>
+                    <div class="input-group mb-2">
+                        <label for="{{ party.partyid }}" class="input-group-text w-5">{{ party.partyname }}</label>
+                        <input type="number" name="{{ party.partyid }}" value="" required class="form-control">
                     </div>
-
                 {% endfor %}
             </fieldset>
-            <fieldset>
+            <fieldset class="mb-2">
                 <legend>Other informations</legend>
                 <div>
-                    <label for="">Polling unit</label>
-                    <select name="polling_unit" id="" required>
+                    <label for="" class="form-label">Select polling unit</label>
+                    <select name="polling_unit" id="" required class="form-select form-select-lg mb-2">
                         {% for pu in polling_units %}
                             <option value="{{ pu.pk }}">{{ pu }}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <div>
-                    <label for="">Agent Name</label>
-                    <input type="text" required name="agent_name">
+                    <label for="" class="form-label">Agent Name</label>
+                    <input type="text" required name="agent_name" class="form-control">
                 </div>
             </fieldset>
-            <button type="submit">Save results</button>
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">Save results</button>
+            {% endbuttons %}
         </form>
     </div>
 {% endblock content %}

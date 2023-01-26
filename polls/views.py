@@ -5,11 +5,17 @@ from .models import PollingUnit, AnnouncedPuResults, LGA, Party
 
 
 def home(request):
+    """
+    this renders the landing page
+    """
 
     return render(request, "home.html")
 
 
 def polling_units(request):
+    """
+    this renders the list of all polling units
+    """
     polling_units = PollingUnit.objects.exclude(polling_unit_name__exact="")
 
     context = {

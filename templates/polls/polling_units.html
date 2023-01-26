@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 
 {% block page_header %}
-
+    <h3 class="display-5">Polling uints</h3>
 {% endblock page_header %}
 
 
 {% block content %}
-    <ul>
+    <ul class="list-group">
         {% for unit in polling_units  %}
             {% if unit.polling_unit_name|length %}
-                <li><a href="{% url "polls:unit_results" unit.pk %}">{{ unit.polling_unit_name }}</a></li>
+                <li class="list-group-item">
+                    <a href="{% url "polls:unit_results" unit.pk %}" class="list-group-item list-group-item-action">    
+                        {{ unit.polling_unit_name }}
+                    </a>
+                </li>
             {% endif %}
         {% endfor %}
     </ul>

@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 
 {% block page_header %}
-    2011 National Election
-{% endblock page_header %}
+  <div class="p-3 mb-4 bg-light border rounded-3">
+    <div class="container-fluid py-4">
+      <h1 class="display-3">2011 INEC Election</h1>
+      
+      <p class="lead">
+        Welcome to 2011 INEC national election coalation center.
+        <br>
+        Here you can track the on going election result and new polling units results are also 
+        registered here. 
+      </p>
 
-{% block content %}
-    <div>
-        <p>
-            <a href="{% url "polls:polling_units" %}">View total results by polling units </a> - 
-            <a href="{% url "polls:lga_results" %}">View total results by LGA </a> - 
-            <a href="{% url "polls:add_results" %}">Add results</a>
-        </p>
-        
+      
     </div>
-{% endblock content %}
+  </div>
+{% endblock page_header %}

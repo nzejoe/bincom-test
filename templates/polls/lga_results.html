@@ -3,9 +3,9 @@
 
 {% block page_header %}
     {% if not lga %}
-        <p>Total collate results</p>
+        <h3 class="display-5">Total collated results</h3>
     {% else %}
-        <p>Total results by {{ lga }} LGA</p>
+        <h3 class="display-5">Total results by {{ lga }} LGA</h3>
     {% endif %}
 {% endblock page_header %}
 
@@ -13,19 +13,19 @@
 {% block content %}
     <div>
         <p>Filter by LGA</p>
-        <form action="{% url "polls:lga_results" %}" method="GET">
-            <select name="lga" id="">
+        <form action="{% url "polls:lga_results" %}" method="GET" class="form">
+            <select name="lga" id="" class="form-select form-select-lg mb-2">
                 <option value="all">All</option>
                 {% for lga in lga_list %}
                     <option value="{{ lga.pk }}">{{ lga }}</option>
                 {% endfor %}
             </select>
-            <button type="submit">Filter</button>
+            <button type="submit" class="btn btn-primary btn-lg">Filter</button>
         </form>
-        <table>
+        <table class="table table-hover my-3">
         <thead>
-            <th>Party Name</th>
-            <th>Total votes</th>
+            <th scope="col">Party Name</th>
+            <th scope="col">Total votes</th>
         </thead>
         <tbody>
             {% for result in lga_results %}
@@ -35,7 +35,7 @@
                 </tr>
             {% empty %}
             <tr>
-                <td colspan="2">No result collate for {{ lga }} LGA yet.</td>
+                <td colspan="2">No result collated for {{ lga }} LGA yet.</td>
             </tr>
             {% endfor %}
         </tbody>

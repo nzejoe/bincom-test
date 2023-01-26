@@ -38,6 +38,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # local apps
     "polls",
+    # Third party apps.
+    "bootstrap5",
     # default system apps
     "django.contrib.admin",
     "django.contrib.auth",

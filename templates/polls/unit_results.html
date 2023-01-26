@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 {% block page_header %}
-    <p>Election results for {{ polling_unit }}</p>
+    <h3 class="display-5">Election results for {{ polling_unit }}</h3>
 {% endblock page_header %}
 
 
 {% block content %}
-    <table>
+    <table class="table table-hover">
         <thead>
-            <th>Party Name</th>
-            <th>Number of votes</th>
+            <th scope="col">Party Name</th>
+            <th scope="col">Number of votes</th>
         </thead>
         <tbody>
             {% for result in unit_results %}
